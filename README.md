@@ -11,5 +11,5 @@
 
 结果如下图：
 
-![截图](https://ws4.sinaimg.cn/large/006tKfTcgy1g0io3vwhthj31gy0sadms.jpg)
+![截图](https://github.com/LJ147/spider_leetcode/tree/master/spider_leetcode/data/result.png)
 
