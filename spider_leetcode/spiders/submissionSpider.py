@@ -13,7 +13,7 @@ import time
 class SubmissionSpider(scrapy.Spider):
     # 名称，启动方式 scrapy crawl submission
     name = "submission"
-    checkDay = '2019-02-24'
+    checkDay = '2019-02-26'
     # 总人数
     totalUserCount = 0
     # 打卡人数

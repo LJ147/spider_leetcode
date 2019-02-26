@@ -11,5 +11,11 @@
 
 结果如下图：
 
-![截图](https://github.com/LJ147/spider_leetcode/raw/master/spider_leetcode/data/result.png)
+![运行截图](https://upload-images.jianshu.io/upload_images/2208282-5ed39d34cbd7af8e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+# 二、个人公众号
+
+欢迎关注个人公众号：一时博客
+
+
+![欢迎关注公众号：一时博客](http://upload-images.jianshu.io/upload_images/2208282-7b270098f5d1e577.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
