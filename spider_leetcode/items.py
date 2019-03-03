@@ -6,9 +6,47 @@
 # https://doc.scrapy.org/en/latest/topics/items.html
 
 import scrapy
-from scrapy import Field,Item
+from scrapy import Field, Item
 
 
-class SpiderLeetcodeItem(Item):
-    # define the fields for your item here like:
-    submissions = Field()
+class UserInfo(Item):
+    # basic profile
+    realname = Field()
+    username = Field()
+    location = Field()
+    website = Field()
+
+    # contest
+    rating = Field()
+    globalRanking = Field()
+    finishedContests = Field()
+
+    # progress
+    solvedQuestion = Field()
+    acceptedSubmission = Field()
+    acceptanceRate = Field()
+
+    # contribution
+
+    points = Field()
+    problems = Field()
+    testCases = Field()
+
+
+class CheckDayInfo(Item):
+
+    avatar = Field()
+    username = Field()
+    address = Field()
+    realname = Field()
+    website = Field()
+    checkDate = Field()
+    checkDaysInTheLastYear = Field()
+    checked = Field()
+    submissionOfToday = Field()
+    submissionCount = Field()
+
+    # progress
+    solvedQuestion = Field()
+    acceptedSubmission = Field()
+    acceptanceRate = Field()
