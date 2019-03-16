@@ -26,13 +26,12 @@ NEWSPIDER_MODULE = 'spider_leetcode.spiders'
 
 # LOG_LEVEL = 'INFO'
 
-MYSQL_HOST = '129.204.0.182'
 # MYSQL_HOST = 'localhost'
 
 
 MYSQL_DBNAME = 'leetcode'  # 数据库名字，请修改
 MYSQL_USER = 'root'  # 数据库账号，请修改
-MYSQL_PASSWD = 'true_password'  # 数据库密码，请修改
+MYSQL_PASSWD = 'password'  # 数据库密码，请修改
 
 MYSQL_PORT = 3306  # 数据库端口
 
