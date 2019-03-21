@@ -11,5 +11,3 @@ if __name__ == '__main__':
 
     # cmdline.execute("scrapy crawl submission".split())
     # cmdline.execute("scrapy crawl userInfo".split())
-
-

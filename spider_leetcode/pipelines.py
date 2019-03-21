@@ -52,17 +52,21 @@ class CheckPipeline(object):
 
 
         elif spider.name == "userInfo":
-            self.cursor.execute(
-                """update CheckDayInfo set  updateTime = %s, address = %s, avatar = %s, solvedQuestion = %s, acceptedSubmission = %s, acceptanceRate = %s, website = %s where username = %s and date = %s""",
-                (updateTime,
-                 item['address'],
-                 item['avatar'],
-                 item['solvedQuestion'],
-                 item['acceptedSubmission'],
-                 item['acceptanceRate'],
-                 item['website'],
-                 item['username'],
-                 item['checkDate']
-                 ))
-
+            self.cursor.execute("""select * from CheckDayInfo where username = %s and date = %s""", (item['username'],
+                                                                                                     item['checkDate']))
+            ret = self.cursor.fetchone()
+            if ret:
+                self.cursor.execute(
+                    """update CheckDayInfo set  updateTime = %s, address = %s, avatar = %s, solvedQuestion = %s, acceptedSubmission = %s, acceptanceRate = %s, website = %s where username = %s and date = %s""",
+                    (updateTime,
+                     item['address'],
+                     item['avatar'],
+                     item['solvedQuestion'],
+                     item['acceptedSubmission'],
+                     item['acceptanceRate'],
+                     item['website'],
+                     item['username'],
+                     item['checkDate']
+                     ))
         self.connect.commit()
+

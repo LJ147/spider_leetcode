@@ -8,5 +8,5 @@ if __name__ == '__main__':
     while True:
         os.system("scrapy crawl submission")
         os.system("scrapy crawl userInfo")
-        # 休眠一小时
+
         time.sleep(60 * 60)
