@@ -4,8 +4,11 @@
 #
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
+import random
 
 from scrapy import signals
+
+from spider_leetcode.settings import USER_AGENT_LIST
 
 
 class SpiderLeetcodeSpiderMiddleware(object):
@@ -101,3 +104,11 @@ class SpiderLeetcodeDownloaderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+#首先在scrapy的middware中定义一个middware类
+class RandomUserAgentMiddleware(object):
+#重定义他的process_request方法：
+    def process_request(self, request, spider):
+        rand_use  = random.choice(USER_AGENT_LIST)#这个USER_AGENT_LIST是从settings里面导入的
+        if rand_use:
+            request.headers.setdefault('User-Agent', rand_use)
