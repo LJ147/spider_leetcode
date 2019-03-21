@@ -5,11 +5,8 @@ import json
 import os
 import time
 import ast
-<<<<<<< HEAD
 
 import requests
-=======
->>>>>>> 1bf39f3cb5cf8354eb15b74c689b0724598ff67c
 import scrapy
 
 from spider_leetcode.items import CheckDayInfo
@@ -18,21 +15,12 @@ from spider_leetcode.items import CheckDayInfo
 class SubmissionSpider(scrapy.Spider):
     # 名称，启动方式 scrapy crawl submission
     name = "submission"
-<<<<<<< HEAD
-=======
-    checkDate = '2019-02-28'
->>>>>>> 1bf39f3cb5cf8354eb15b74c689b0724598ff67c
 
     # 序号
     count = 0
     # 用户submission地址
     submissonUrls = []
     # 用户信息输入路径
-<<<<<<< HEAD
-=======
-    path = "/leetcode-address.csv"
->>>>>>> 1bf39f3cb5cf8354eb15b74c689b0724598ff67c
-
     submissionOfToday = 0
 
     submissionCount = 0
@@ -76,11 +64,8 @@ class SubmissionSpider(scrapy.Spider):
             self.submissonUrls.append(submissionUrl)
 
     def start_requests(self):
-<<<<<<< HEAD
         self.getSubmissionUrlsFromUserAddress()
-=======
-        self.getSubmissionUrlsFromUserAddress(self.path)
->>>>>>> 1bf39f3cb5cf8354eb15b74c689b0724598ff67c
+
         self.checkDate = time.strftime("%Y-%m-%d", time.localtime())
         for url in self.submissonUrls:
             username = url.split('/')[-1]
