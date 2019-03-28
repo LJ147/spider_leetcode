@@ -21,6 +21,7 @@ class SubmissionSpider(scrapy.Spider):
     # 用户submission地址
     submissonUrls = []
     # 用户信息输入路径
+
     submissionOfToday = 0
 
     submissionCount = 0
@@ -40,8 +41,7 @@ class SubmissionSpider(scrapy.Spider):
         :return:
         """
         if submission != None:
-            possibleUnixTime = [self.datetime2Timestamp(day + " 00:00:00"), self.datetime2Timestamp(day + " 08:00:00"),
-                                self.datetime2Timestamp(day + " 16:00:00")]
+            possibleUnixTime = [self.datetime2Timestamp(day + " 00:00:00") ,self.datetime2Timestamp(day + " 00:08:00")]
             for i in possibleUnixTime:
                 if str(i) in submission:
                     self.submissionOfToday = submission[str(i)]
@@ -53,8 +53,9 @@ class SubmissionSpider(scrapy.Spider):
         :param path:
         :return: eg: https://leetcode.com/api/user_submission_calendar/uwi/
         """
-        urls = json.loads(
-            requests.get("https://group.hellogod.cn/api/member/getMemberAddressList", params={'status': 0}).text)
+        # urls = json.loads(
+        #     requests.get("https://group.hellogod.cn/api/member/getMemberAddressList", params={'status': 0}).text)
+        urls = ['https://leetcode.com/alexlj/']
 
         for line in urls:
             splitResult = line[8:].split("/")
@@ -65,10 +66,10 @@ class SubmissionSpider(scrapy.Spider):
 
     def start_requests(self):
         self.getSubmissionUrlsFromUserAddress()
-
         self.checkDate = time.strftime("%Y-%m-%d", time.localtime())
         for url in self.submissonUrls:
             username = url.split('/')[-1]
+            time.sleep(1)
             yield scrapy.Request(url=url, callback=self.parse_submission, dont_filter=True,
                                  meta={'username': username})
 
@@ -89,14 +90,12 @@ class SubmissionSpider(scrapy.Spider):
 
         submissions = ast.literal_eval(submissions)
         sum = 0
-        for key, value in submissions.items():
-            sum += value
+
         checkDayInfo = CheckDayInfo()
         checkDayInfo['username'] = username
         checkDayInfo['checkDate'] = time.strftime("%Y-%m-%d", time.localtime())
         checkDayInfo['submissionOfToday'] = self.submissionOfToday
 
-        checkDayInfo['submissionCount'] = sum
 
         checkDayInfo['checkDaysInTheLastYear'] = int(checkDaysInTheLastYear)
         if self.userHasSubmissionOnDay(submissions, self.checkDate):

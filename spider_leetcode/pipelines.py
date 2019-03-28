@@ -8,6 +8,7 @@ import datetime
 import time
 
 import pymysql.cursors
+import requests
 from twisted.enterprise import adbapi
 from spider_leetcode.settings import MYSQL_HOST, MYSQL_DBNAME, MYSQL_PASSWD, MYSQL_PORT, MYSQL_USER
 from spider_leetcode import settings
@@ -29,44 +30,63 @@ class CheckPipeline(object):
         updateTime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         if spider.name == "submission":
+            body = {
+                'username': item['username'],
+                'date': item['checkDate'],
+                'checked': item['checked'],
+                'updateTime': updateTime
 
-            self.cursor.execute("""select * from CheckDayInfo where username = %s and date = %s""", (item['username'],
-                                                                                                     item['checkDate']))
-            ret = self.cursor.fetchone()
-            if ret:
-                self.cursor.execute(
-                    """update CheckDayInfo set  checked = %s, updateTime = %s where username = %s and date = %s""",
-                    (
-                        item['checked'],
-                        updateTime,
-                        item['username'],
-                        item['checkDate']
-                    ))
+            }
+            requests.post("https://group.hellogod.cn/checkDayInfo/submission", data=body)
 
-            else:
-                self.cursor.execute(
-                    "insert into  CheckDayInfo(infoId,username, date,checked,updateTime) values(%s,%s, %s, %s,%s)",
-                    (
-                        None, item['username'], item['checkDate'], item['checked'],
-                        updateTime))
+            # self.cursor.execute("""select * from CheckDayInfo where username = %s and date = %s""", (item['username'],
+            #                                                                                          item['checkDate']))
+            # ret = self.cursor.fetchone()
+            # if ret:
+            #     self.cursor.execute(
+            #         """update CheckDayInfo set  checked = %s, updateTime = %s where username = %s and date = %s""",
+            #         (
+            #             item['checked'],
+            #             updateTime,
+            #             item['username'],
+            #             item['checkDate']
+            #         ))
+            #
+            # else:
+            #     self.cursor.execute(
+            #         "insert into  CheckDayInfo(infoId,username, date,checked,updateTime) values(%s,%s, %s, %s,%s)",
+            #         (
+            #             None, item['username'], item['checkDate'], item['checked'],
+            #             updateTime))
 
 
         elif spider.name == "userInfo":
-            self.cursor.execute("""select * from CheckDayInfo where username = %s and date = %s""", (item['username'],
-                                                                                                     item['checkDate']))
-            ret = self.cursor.fetchone()
-            if ret:
-                self.cursor.execute(
-                    """update CheckDayInfo set  updateTime = %s, address = %s, avatar = %s, solvedQuestion = %s, acceptedSubmission = %s, acceptanceRate = %s, website = %s where username = %s and date = %s""",
-                    (updateTime,
-                     item['address'],
-                     item['avatar'],
-                     item['solvedQuestion'],
-                     item['acceptedSubmission'],
-                     item['acceptanceRate'],
-                     item['website'],
-                     item['username'],
-                     item['checkDate']
-                     ))
-        self.connect.commit()
+            body = {
+                'username': item['username'],
+                'date': item['checkDate'],
+                'address': item['address'],
+                'avatar': item['avatar'],
+                'website': item['website'],
+                'solvedQuestion': item['solvedQuestion'],
+                'acceptanceRate': item['acceptanceRate'],
+                'updateTime':updateTime
+            }
+            requests.post("https://group.hellogod.cn/checkDayInfo/userInfo", data=body)
 
+            # self.cursor.execute("""select * from CheckDayInfo where username = %s and date = %s""", (item['username'],
+            #                                                                                          item['checkDate']))
+            # ret = self.cursor.fetchone()
+            # if ret:
+            #     self.cursor.execute(
+            #         """update CheckDayInfo set  updateTime = %s, address = %s, avatar = %s, solvedQuestion = %s, acceptedSubmission = %s, acceptanceRate = %s, website = %s where username = %s and date = %s""",
+            #         (updateTime,
+            #          item['address'],
+            #          item['avatar'],
+            #          item['solvedQuestion'],
+            #          item['acceptedSubmission'],
+            #          item['acceptanceRate'],
+            #          item['website'],
+            #          item['username'],
+            #          item['checkDate']
+            #          ))
+        # self.connect.commit()
