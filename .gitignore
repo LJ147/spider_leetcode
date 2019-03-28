@@ -1,6 +1,4 @@
 .idea
 /spider_leetcode/settings.py
-spider_leetcode/__pycache__/middlewares.cpython-36.pyc
-spider_leetcode/__pycache__/pipelines.cpython-36.pyc
-spider_leetcode/spiders/__pycache__/userInfoSpider.cpython-36.pyc
+
 .DS_Store/
