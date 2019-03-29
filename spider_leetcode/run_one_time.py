@@ -4,10 +4,10 @@
 from scrapy import cmdline
 import os
 if __name__ == '__main__':
-    os.system("scrapy crawl submission")
-    os.system("scrapy crawl userInfo")
+    # os.system("scrapy crawl submission")
+    # os.system("scrapy crawl userInfo")
 
     # time.sleep(60 * 60)
 
     # cmdline.execute("scrapy crawl submission".split())
-    # cmdline.execute("scrapy crawl userInfo".split())
+    cmdline.execute("scrapy crawl userInfo".split())

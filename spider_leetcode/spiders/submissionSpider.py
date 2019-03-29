@@ -41,7 +41,8 @@ class SubmissionSpider(scrapy.Spider):
         :return:
         """
         if submission != None:
-            possibleUnixTime = [self.datetime2Timestamp(day + " 00:00:00") ,self.datetime2Timestamp(day + " 00:08:00")]
+            possibleUnixTime = [self.datetime2Timestamp(day + " 00:00:00"), self.datetime2Timestamp(day + " 08:00:00"),
+                                self.datetime2Timestamp(day + " 16:00:00")]
             for i in possibleUnixTime:
                 if str(i) in submission:
                     self.submissionOfToday = submission[str(i)]
@@ -53,9 +54,8 @@ class SubmissionSpider(scrapy.Spider):
         :param path:
         :return: eg: https://leetcode.com/api/user_submission_calendar/uwi/
         """
-        urls = json.loads(
-            requests.get("https://group.hellogod.cn/api/member/getMemberAddressList", params={'status': 0}).text)
-        # urls = ['https://leetcode.com/alexlj/']
+        urls = json.loads(requests.get("https://group.hellogod.cn/api/member/getMemberAddressList", params={'status': 0}).text)
+        # urls = ['https://leetcode-cn.com/summer_hexin/']
 
         for line in urls:
             splitResult = line[8:].split("/")
@@ -95,7 +95,6 @@ class SubmissionSpider(scrapy.Spider):
         checkDayInfo['username'] = username
         checkDayInfo['checkDate'] = time.strftime("%Y-%m-%d", time.localtime())
         checkDayInfo['submissionOfToday'] = self.submissionOfToday
-
 
         checkDayInfo['checkDaysInTheLastYear'] = int(checkDaysInTheLastYear)
         if self.userHasSubmissionOnDay(submissions, self.checkDate):

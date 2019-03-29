@@ -14,9 +14,8 @@ class UerInfoSpider(scrapy.Spider):
     name = "userInfo"
 
     def start_requests(self):
-        urls = json.loads(
-            requests.get("https://group.hellogod.cn/api/member/getMemberAddressList", params={'status': 0}).text)
-        # urls = ['https://leetcode.com/alexlj/']
+        urls = json.loads(requests.get("https://group.hellogod.cn/api/member/getMemberAddressList", params={'status': 0}).text)
+        # urls = ['https://leetcode-cn.com/summer_hexin/']
         for url in urls:
             username = url[8:].split("/")[1]
             url = url.strip()
