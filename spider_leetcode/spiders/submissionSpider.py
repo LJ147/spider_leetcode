@@ -53,9 +53,9 @@ class SubmissionSpider(scrapy.Spider):
         :param path:
         :return: eg: https://leetcode.com/api/user_submission_calendar/uwi/
         """
-        # urls = json.loads(
-        #     requests.get("https://group.hellogod.cn/api/member/getMemberAddressList", params={'status': 0}).text)
-        urls = ['https://leetcode.com/alexlj/']
+        urls = json.loads(
+            requests.get("https://group.hellogod.cn/api/member/getMemberAddressList", params={'status': 0}).text)
+        # urls = ['https://leetcode.com/alexlj/']
 
         for line in urls:
             splitResult = line[8:].split("/")

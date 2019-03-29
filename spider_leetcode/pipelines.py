@@ -37,7 +37,8 @@ class CheckPipeline(object):
                 'updateTime': updateTime
 
             }
-            requests.post("https://group.hellogod.cn/checkDayInfo/submission", data=body)
+            # requests.post("https://group.hellogod.cn/checkDayInfo/submission", data=body)
+            requests.post("http://localhost/checkDayInfo/userInfo", data=body)
 
             # self.cursor.execute("""select * from CheckDayInfo where username = %s and date = %s""", (item['username'],
             #                                                                                          item['checkDate']))
@@ -71,7 +72,9 @@ class CheckPipeline(object):
                 'acceptanceRate': item['acceptanceRate'],
                 'updateTime':updateTime
             }
-            requests.post("https://group.hellogod.cn/checkDayInfo/userInfo", data=body)
+            # requests.post("https://group.hellogod.cn/checkDayInfo/userInfo", data=body)
+            requests.post("http://localhost/checkDayInfo/userInfo", data=body)
+
 
             # self.cursor.execute("""select * from CheckDayInfo where username = %s and date = %s""", (item['username'],
             #                                                                                          item['checkDate']))
